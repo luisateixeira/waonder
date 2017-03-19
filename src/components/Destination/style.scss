@@ -59,6 +59,7 @@
     background: black;
     padding: 0px 5px;
     @include animation('fade-in .5s');
+    cursor: pointer;
   }
 
   &--next-button {

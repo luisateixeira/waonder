@@ -21,9 +21,12 @@ class Container extends React.Component {
     }
   }
 
-  getView(destination, images, allDestinationsIsFetching) {
+  getView() {
+    const {destination, images, resetDestinaton, allDestinationsIsFetching} = this.props;
+
     if (destination) {
       return <Destination gotoDestination={() => this.gotoDestination()}
+                          resetDestinaton={resetDestinaton}
                           {...{destination, images}}
                           key='destination' />
     }
@@ -33,14 +36,14 @@ class Container extends React.Component {
   }
 
   render() {
-    const {destination, images, allDestinationsIsFetching} = this.props;
+
     return (
       <div>
         <ReactCSSTransitionGroup
           transitionName="main-page"
           transitionEnterTimeout={500}
           transitionLeaveTimeout={500}>
-          {this.getView(destination, images, allDestinationsIsFetching)}
+          {this.getView()}
         </ReactCSSTransitionGroup>
       </div>
     );
@@ -52,11 +55,12 @@ Container.propTypes = {
   fecthImages: React.PropTypes.func.isRequired,
   destination: React.PropTypes.object,
   images: React.PropTypes.array,
-  fetchDestination: React.PropTypes.func.isRequired
+  fetchDestination: React.PropTypes.func.isRequired,
+  resetDestinaton: React.PropTypes.func.isRequired
 }
 
 import {connect} from 'react-redux';
-import {fetchDestination} from '../actions/destination';
+import {fetchDestination, resetDestinaton} from '../actions/destination';
 import {fecthImages} from '../actions/entities';
 import {getDestination, getImages, getAllDestinationsIsFetching} from '../reducers';
 
@@ -71,7 +75,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   fecthImages: fecthImages,
-  fetchDestination: fetchDestination
+  fetchDestination: fetchDestination,
+  resetDestinaton: resetDestinaton
 }
 
 export default connect(

@@ -100,3 +100,9 @@ export const fetchAllDestinations = () => (dispatch, getState) => {
           error: error
         }));
 }
+
+export const RESET_DESTINATION = 'RESET_DESTINATION';
+
+export const resetDestinaton = () => ({
+  type: RESET_DESTINATION
+});

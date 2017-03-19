@@ -6,6 +6,7 @@ const id = (state = null, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_DESTINATION_START:
     case ActionTypes.FETCH_DESTINATION_FAILURE:
+    case ActionTypes.RESET_DESTINATION:
       return null;
     case ActionTypes.FETCH_DESTINATION_SUCCESS:
       return action.response.id;
@@ -18,9 +19,10 @@ const country = (state = null, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_DESTINATION_START:
     case ActionTypes.FETCH_DESTINATION_FAILURE:
-      return [];
+    case ActionTypes.RESET_DESTINATION:
+      return null;
     case ActionTypes.FETCH_DESTINATION_SUCCESS:
-      return action.response.country;
+      return {...action.response.country};
     default:
       return state;
   }
@@ -30,6 +32,7 @@ const video = (state = null, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_DESTINATION_START:
     case ActionTypes.FETCH_DESTINATION_FAILURE:
+    case ActionTypes.RESET_DESTINATION:
       return null;
     case ActionTypes.FETCH_DESTINATION_SUCCESS:
       return {...action.response.video};
@@ -45,6 +48,7 @@ const isFetching = (state = false, action) => {
       return true;
     case ActionTypes.FETCH_DESTINATION_SUCCESS:
     case ActionTypes.FETCH_DESTINATION_FAILURE:
+    case ActionTypes.RESET_DESTINATION:
       return false;
     default:
       return state;

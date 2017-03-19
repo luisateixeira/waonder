@@ -58,7 +58,7 @@ class Destination extends React.Component {
   }
 
   render() {
-    const {destination, images, gotoDestination, scroll, gotoPage} = this.props;
+    const {destination, images, gotoDestination, resetDestinaton, scroll, gotoPage} = this.props;
     const {isVideoReady, isGaleryVisible, isIntroCompleted} = this.state;
 
     return (
@@ -74,16 +74,11 @@ class Destination extends React.Component {
                showPreloader={!isVideoReady && isIntroCompleted}
                setIsCompleted={() => this.introIsCompleted()} />
 
-       {this.isGalleryEnabled(images) ?
-         <ScrollControls/> : null}
+        {this.isGalleryEnabled(images) ? <ScrollControls/> : null}
+        {this.isGalleryEnabled(images) ? <Photos images={images} scroll={scroll} /> : null}
 
-        {this.isGalleryEnabled(images) ?
-          <Photos images={images} scroll={scroll} /> : null}
-
-        <Country destination={destination}
-                 className={isVideoReady && isIntroCompleted ? 'show' : ''} />
-
-        <div className="destination--logo">wa<span>o</span>nder</div>
+        <Country destination={destination} className={isVideoReady && isIntroCompleted ? 'show' : ''} />
+        <div className="destination--logo" onClick={resetDestinaton}>wa<span>o</span>nder</div>
         <div className="destination--back-to-video-button" onClick={() => gotoPage(0)}></div>
         <div className="destination--next-button" onClick={gotoDestination}></div>
       </div>
@@ -95,6 +90,7 @@ Destination.propTypes = {
   images: React.PropTypes.array,
   destination: React.PropTypes.object.isRequired,
   gotoDestination: React.PropTypes.func.isRequired,
+  resetDestinaton: React.PropTypes.func.isRequired,
   scroll: React.PropTypes.object.isRequired,
   gotoPage: React.PropTypes.func.isRequired,
   setMaxPage: React.PropTypes.func.isRequired,
