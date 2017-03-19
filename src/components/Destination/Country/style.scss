@@ -1,0 +1,34 @@
+@import "src/styles/mixins.scss";
+@import "src/styles/animations.scss";
+
+.destination--country {
+  pointer-events: none;
+  &--name {
+    position: absolute;
+    left: 40px;
+    top: 80px;
+    background: white;
+    padding: 0px 5px;
+    color: black;
+    @include transition(none);
+    span {
+      font-size: 30px;
+    }
+  }
+  &--info {
+    position: absolute;
+    left: 40px;
+    bottom: 20px;
+    text-align: left;
+    background-color: rgba(0,0,0,.95);
+    font-size: 11px;
+    padding: 1px 6px;
+    line-height: 20px;
+    color: #c1c1c1;
+    @include transition(none);
+    span {
+      color: white;
+      text-transform: capitalize;
+    }
+  }
+}

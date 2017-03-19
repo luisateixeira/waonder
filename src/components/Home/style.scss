@@ -1,0 +1,141 @@
+@import "src/styles/svg.scss";
+@import "src/styles/mixins.scss";
+
+.home {
+
+  &--bkg-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    &--placeholder,
+    &--original {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      transform: scale(1.02);
+    }
+
+    &--placeholder {
+      background-image: url('./images/bg_placeholder.jpg');
+      filter: blur(10px);
+    }
+
+    &--original {
+      opacity: 0;
+      &.show {
+        opacity: 1;
+        @include transition(opacity 1s);
+      }
+    }
+
+    &--overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+      background: rgba(0,0,0,0.35);
+      &:after {
+        content: "";
+        @include overlay-pattern;
+      }
+    }
+  }
+
+  &--presentation-container {
+    @include center(both);
+
+    &--title {
+      @include logo;
+    }
+
+    &--subtitle {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 1px;
+      opacity: .9;
+    }
+
+    &--start {
+      margin: 30px 0;
+      @include center(horizontal);
+      &--button {
+        @include svg-circle(#fff, 'none');
+        width: 80px;
+        height: 80px;
+        background-color: transparent;
+        cursor: pointer;
+        position: relative;
+
+        &::before {
+          @include svg-globe;
+          @include center(both);
+          @include transition(opacity .25s);
+          @include animation('globe-fade 1s ease infinite alternate');
+          width: 65px;
+          height: 65px;
+          content: '';
+          display: block;
+          opacity: .6;
+        }
+
+        &::after {
+          @include transition(opacity .1s);
+          content: 'Start';
+          display: block;
+          opacity: 0;
+          text-transform: uppercase;
+          font-size: 13px;
+          letter-spacing: 1px;
+        }
+
+        &:hover {
+          &::before {@include animation('none'); opacity: 0;}
+          &::after { @include transition(opacity .8s);opacity: .9;}
+        }
+      }
+    }
+  }
+
+  &--headset {
+    @include center(horizontal);
+    @include transition(all .7s .2s);
+    bottom: 10px;
+    opacity: 0;
+
+    &.show {
+      bottom: 20px;
+      opacity: 1;
+    }
+
+    &--icon {
+      @include svg-headset;
+      width: 28px;
+      height: 28px;
+      margin-top: 4px;
+      float: left;
+    }
+    &--text {
+      font-size: 11px;
+      line-height: 15px;
+      letter-spacing: 1px;
+      text-align: left;
+      margin-left: 8px;
+      float: left;
+      width: 160px;
+    }
+  }
+}
+
+@include keyframes(globe-fade) {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: .6; }
+  100% { transform: translate(-50%, -50%) scale(.95); opacity: .4; }
+}

@@ -1,0 +1,136 @@
+@import "src/styles/mixins.scss";
+
+.destination--photos {
+  overflow: hidden;
+
+  &--single {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    margin-top: 100%;
+    background-color: black;
+    overflow: hidden;
+
+    &--image-wrapper {
+      width: 100%;
+      height: 100%;
+
+      &--placeholder,
+      &--original {
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        transform: scale(1.1);
+      }
+      &--placeholder {
+        filter: blur(10px);
+      }
+
+      &:after {
+        content: "";
+        @include overlay-pattern;
+      }
+    }
+
+
+    &--user {
+      position: absolute;
+      right: 40px;
+      top: 40px;
+      background-color: black;
+      font-size: 11px;
+      padding: 1px 3px;
+      color: #c1c1c1;
+      max-width: 400px;
+      line-height: 20px;
+      text-align: right;
+      opacity: 0;
+      @include transition(opacity 1s);
+
+      a, a:visited, a:hover{
+        color: white;
+        text-decoration: none;
+        font-size: 11px;
+        margin: 0 5px;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.active {
+      z-index: 1;
+      height: 100%;
+      margin-top: 0;
+      margin-bottom: 0;
+      &.down {
+        @include animation("down 1s");
+      }
+      &.up {
+        @include animation("up 1s");
+      }
+
+      .destination--photos--single--user {
+        @include transition(opacity 1s 1s);
+        opacity: 1;
+      }
+    }
+
+    &.first {
+      @include animation("first 1s");
+    }
+
+    &.last {
+      @include animation(none);
+      height: 100%;
+      margin-top: 0;
+    }
+  }
+}
+
+
+@include keyframes (first) {
+  from {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  to {
+    height: 0;
+    margin-top: 100%;
+    margin-bottom: 0;
+  }
+}
+
+@include keyframes (down) {
+  from {
+    height: 0;
+    margin-top: 100%;
+    margin-bottom: 0;
+  }
+  to {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@include keyframes (up) {
+  from {
+    height: 0;
+    margin-top: 0;
+    margin-bottom: 100%;
+  }
+  to {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+
+  }
+}

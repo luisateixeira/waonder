@@ -1,0 +1,20 @@
+@import "src/styles/mixins.scss";
+@import "src/styles/variables.scss";
+
+.main-page-leave {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+.main-page-leave.main-page-leave-active {
+	// @include filter(blur(5px));
+	// transform: scale(1.1);
+	@include transition(all #{$page-transition-delay+'s'} ease-out);
+  opacity: 0;
+}
+.main-page-enter.main-page-enter-active {
+	display: none;
+}

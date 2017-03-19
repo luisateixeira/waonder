@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "strict": ["error", "never"],
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": [
+    "react"
+  ]
+}

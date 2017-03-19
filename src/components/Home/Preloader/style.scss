@@ -1,0 +1,10 @@
+@import "src/styles/svg.scss";
+
+.preloader-container {
+  &--loader {
+    @include svg-circle-preloader;
+    width: 80px;
+    height: 80px;
+  }
+
+}

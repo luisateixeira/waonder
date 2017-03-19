@@ -1,0 +1,140 @@
+@import "src/styles/mixins.scss";
+@import "src/styles/svg.scss";
+@import "src/styles/animations.scss";
+
+.destination--video {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+
+  &--buffering {
+    @include center(both);
+    @include svg-circle-preloader;
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    @include transition(none);
+  }
+
+  &--controls {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    &--volume {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      &.up {
+        @include svg-volume-up;
+      }
+      &.down {
+        @include svg-volume-down;
+      }
+    }
+  }
+
+  &--user {
+    position: absolute;
+    left: 40px;
+    top: 116px;
+    background-color: black;
+    font-size: 11px;
+    padding: 1px 3px;
+    color: #c1c1c1;
+    @include transition(none);
+    opacity: 0;
+
+    a, a:visited, a:hover{
+      margin: 0 5px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &--container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    @include transition(none);
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(
+          to right top,
+          transparent 33%,
+          black 33%,
+          black 66%,
+          transparent 66%
+      );
+      background-size: 3px 3px;
+      opacity: .3;
+    }
+  }
+}
+
+.destination--video.show {
+  .destination--video--user {
+    @include transition(all .6s 2.7s);
+    opacity: 1;
+  }
+  .destination--video--container,
+  .destination--video--buffering {
+    @include transition(opacity 1s 2s);
+    opacity: 1;
+  }
+}
+
+.gallery-visible .destination--video {
+  &--user {
+    display: none;
+  }
+  &--buffering {
+    @include transition(opacity 1s 1s);
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+  }
+
+  &--controls {
+    @include animation('hide-show 2s');
+    top: 7px;
+    right: 30px;
+    &--volume {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+    }
+  }
+}
+
+@include keyframes (hide-show) {
+  0%, 80% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .destination--video--container { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  .destination--video--container { width: 300%; left: -100%; }
+}

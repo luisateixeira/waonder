@@ -1,0 +1,152 @@
+@import "src/styles/mixins.scss";
+@import "src/styles/svg.scss";
+@import "src/styles/animations.scss";
+
+.destination {
+
+  &--logo,
+  &--country,
+  &--intro,
+  &--scroll-controls,
+  &--next-button,
+  &--loading {
+    position: absolute;
+  }
+
+  &--video,
+  &--photos {
+    position: fixed;
+  }
+
+  &--country,
+  &--photos {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &--photos {
+    z-index: -1;
+  }
+
+  &--intro {
+    @include center(both);
+    @include animation('fade-in .5s');
+    &.hide {
+      @include transition(opacity 1s 1s);
+      opacity: 0;
+    }
+  }
+
+  &--country {
+    opacity: 0;
+    &.show {
+      @include transition(all .6s 1.5s);
+      opacity: 1;
+    }
+  }
+
+  &--scroll-controls {
+    bottom: 20px;
+    @include center(horizontal);
+  }
+
+  &--logo {
+    @include logo(20px);
+    left: 40px;
+    top: 40px;
+    background: black;
+    padding: 0px 5px;
+    @include animation('fade-in .5s');
+  }
+
+  &--next-button {
+    @include center(vertical);
+    @include svg-circle(#fff, 'none');
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    cursor: pointer;
+
+    &::before {
+      @include svg-globe;
+      @include center(both);
+      @include transition(opacity .25s);
+      @include animation('globe-fade 1s ease infinite alternate');
+      width: 35px;
+      height: 35px;
+      content: '';
+      display: block;
+      opacity: .6;
+    }
+
+    &::after {
+      @include transition(opacity .1s);
+      content: 'Next';
+      display: block;
+      opacity: 0;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1px;
+      @include center(both);
+    }
+
+    &:hover {
+      &::before {@include animation('none'); opacity: 0;}
+      &::after { @include transition(opacity .8s);opacity: .9;}
+    }
+  }
+
+  &--back-to-video-button {
+    @include svg-zoom;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 123px;
+    left: 315px;
+    z-index: -1;
+    cursor: pointer;
+    opacity: 0;
+    background-color: rgba(255,255,255,.3);
+    border-radius: 2px;
+  }
+
+  &.gallery-visible {
+    .destination--video {
+      width: 300px;
+      height: 169px;
+      z-index: 1;
+      top: 116px;
+      left: 40px;
+      position: absolute;
+      &.show {
+        @include transition(all .5s);
+      }
+    }
+
+    .destination--photos {
+      z-index: auto;
+    }
+
+    .destination--country {
+      @include transition(all .6s .5s);
+      opacity: 1;
+    }
+
+    .destination--back-to-video-button {
+      @include svg-zoom;
+      @include transition(opacity .25s 1.6s);
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+
+
+@include keyframes(globe-fade) {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: .6; }
+  100% { transform: translate(-50%, -50%) scale(.95); opacity: .4; }
+}

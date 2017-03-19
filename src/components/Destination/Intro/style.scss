@@ -1,0 +1,49 @@
+@import "src/styles/mixins.scss";
+@import "src/styles/variables.scss";
+@import "src/styles/animations.scss";
+@import "src/styles/svg.scss";
+
+$typing-delay: 1.5 + $page-transition-delay;
+$blink-delay: .75;
+
+.destination--intro {
+  font-size: 80px;
+  font-size: 20px;
+
+
+  &--typewriter {
+    font-size: 40px;
+    overflow: hidden;
+    line-height: 50px;
+    border-right: .05em solid white;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .1em;
+    @include animation(#{'typing ' + $typing-delay + 's steps(10, end),
+                          blink-caret ' + $blink-delay + 's step-end infinite'});
+  }
+
+  &--preloader {
+    @include svg-circle-preloader;
+    width: 30px;
+    height: 30px;
+    margin-top: 30px;
+    @include center(horizontal);
+    opacity: 0;
+    @include transition(opacity .5s 1s);
+    &.show {
+      opacity: 1;
+      @include transition(opacity .5s);
+    }
+  }
+
+  @include keyframes (typing) {
+    0%, 30% { width: 0 }
+    100% { width: 100% }
+  };
+
+  @include keyframes (blink-caret) {
+    from, to { border-color: transparent }
+    50% { border-color: white; }
+  }
+}

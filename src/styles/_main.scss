@@ -1,0 +1,43 @@
+@import "src/styles/variables.scss";
+
+body, body button, body input, body optgroup, body select, body textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: $sec-color;
+}
+
+body {
+  background-color: $main-color;
+  text-align: center;
+
+  button {
+    outline: 0;
+    border: 0;
+  }
+
+  a, a:visited, a:hover{
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .container {
+    &--destination-button {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      margin-top: -20px;
+      cursor: pointer;
+    }
+
+  }
+}

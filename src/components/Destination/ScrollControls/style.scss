@@ -1,0 +1,101 @@
+@import "src/styles/svg.scss";
+@import "src/styles/mixins.scss";
+
+.destination--scroll-controls {
+  @include animation('fade-in 1s');
+
+  &--scrolldown-icon {
+    @include svg-scrolldown;
+    width: 14px;
+    height: 39px;
+    float: left;
+  }
+
+  &--arrowpad-icon {
+    width: 57px;
+    height: 37px;
+    margin-left: 25px;
+    margin-top: 2px;
+    position: relative;
+    float: left;
+    div {
+      width: 20px;
+      height: 19px;
+      position: absolute;
+      &:after {
+        content: '';
+        width: 0;
+        position: absolute;
+        top: 8px;
+      }
+      &:before {
+        content: '';
+        display: block;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+      }
+    }
+    &--left-arrow {
+      bottom: 0;
+      left: 0;
+      opacity: .5;
+      &:before {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+      &:after {
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        border-right: 4px solid rgba(255, 255, 255, 0.8);
+        left: 7px;
+      }
+    }
+    &--right-arrow {
+      bottom: 0;
+      right: 0;
+      opacity: .5;
+      &:before {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+      &:after {
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        border-left: 4px solid rgba(255, 255, 255, 0.8);
+        right: 7px;
+      }
+    }
+    &--down-arrow {
+      bottom: 0;
+      left: 50%;
+      margin-left: -10px;
+      &:after {
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+        border-top: 4px solid rgba(255, 255, 255, 0.8);
+        left: 8px;
+      }
+    }
+    &--up-arrow {
+      top: 0;
+      left: 50%;
+      margin-left: -10px;
+      &:before {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+      &:after {
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+        border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+        top: auto;
+        bottom: 8px;
+        left: 8px;
+      }
+    }
+  }
+}
