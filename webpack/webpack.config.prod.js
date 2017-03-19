@@ -16,8 +16,7 @@ module.exports = {
     publicPath : '/'
   },
   module: {
-    loaders: require('./common/loaders.js'),
-    rules: require('./common/rules.js')
+    loaders: require('./common/loaders.js')
   },
   plugins: require('./common/plugins.js').concat(
     [
