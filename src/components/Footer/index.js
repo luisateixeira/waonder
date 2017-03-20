@@ -6,7 +6,7 @@ import './style.scss';
 const shareFacebook = () => {
   FB.ui({
     method: 'share',
-    href: 'http://dev.waonder.com',
+    href: 'http://www.waonder.com',
   });
 }
 
