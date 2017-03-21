@@ -19,17 +19,15 @@ module.exports = [
   },
   {
     test: /\.scss$/,
-    loaders: ExtractTextPlugin.extract('css-loader!sass-loader')
+    loaders: ExtractTextPlugin.extract({
+                use: [{
+                    loader: "css-loader"
+                }, {
+                    loader: "sass-loader",
+                    options: {
+                        includePaths: ["node_modules/normalize-scss/sass"]
+                    }
+                }]
+            })
   },
-  {
-    test: /\.css$/,
-    use: [
-      {
-        loader: 'style-loader'
-      },
-      {
-        loader: 'css-loader'
-      }
-    ]
-  }
 ];

@@ -5,7 +5,6 @@ import configureStore from './store';
 import config from './config';
 import Root from './containers/Root';
 import { AppContainer } from 'react-hot-loader';
-import 'normalize.css';
 import './styles/index.scss';
 
 const store = configureStore();
