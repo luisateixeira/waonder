@@ -1,5 +1,6 @@
 @import "src/styles/mixins.scss";
-@import "src/styles/variables.scss";
+
+$page-transition-delay: .5;
 
 .main-page-leave {
 	position: absolute;
