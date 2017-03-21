@@ -26,10 +26,12 @@ class Video extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const {id, setIsReady} = this.props;
-    if (this.state.id !== id && this.state.isLoaded) {
+
+    if (((this.state.id !== id) && (this.state.isLoaded || this.state.loadTimeout)) ||
+        ((this.state.id === id) && (!this.state.isLoaded && this.state.loadTimeout))) {
       this.setState(this.getInitialState());
-      this.unloadVideo().then(() =>
-        this.loadVideo(id));
+      this.unloadVideo();
+      this.loadVideo(id);
     }
 
     if (!prevState.isPlaying && this.state.isPlaying) {
@@ -38,30 +40,30 @@ class Video extends React.Component {
   }
 
   unloadVideo() {
+    this.clearLoadTimeout();
     this.clearLoading();
-    if (this.player) {
-      return this.player.unload();
-    }
-    return Promise.resolve();
+    return (this.player && this.player.unload()) || Promise.resolve();
   }
 
   loadVideo(id) {
+    this.clearLoadTimeout();
+    this.initLoadTimeout();
     return this.player.loadVideo(id);
   }
 
   componentWillUnmount() {
-    this.player.off('loaded');
-    this.player.off('play');
-    this.player.off('timeupdate');
+    this.unloadVideo();
     if (this.player) {
-      this.player.unload();
+      this.player.off('loaded');
+      this.player.off('play');
+      this.player.off('timeupdate');
     }
-    this.clearLoading();
   }
 
   createPlayer(element, id) {
     this.player = new Player(element, {id, loop: true, autoplay:true});
     this.player.on('loaded', () => {
+      this.clearLoadTimeout();
       if (this.state.id === this.props.id) {
         this.player.getPaused().then(ispaused => {
           if (ispaused) {
@@ -96,6 +98,19 @@ class Video extends React.Component {
     if (this.loadingTimer) {
       clearInterval(this.loadingTimer);
       this.loadingTimer = null;
+    }
+  }
+
+  initLoadTimeout() {
+    this.loadtimeout = setTimeout(() => {
+      this.setState({loadTimeout: true});
+    }, 10000);
+  }
+
+  clearLoadTimeout() {
+    if (this.loadtimeout) {
+      clearTimeout(this.loadtimeout);
+      this.loadtimeout = null;
     }
   }
 
