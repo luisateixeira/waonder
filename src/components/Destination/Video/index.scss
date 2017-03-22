@@ -20,7 +20,7 @@
   &--controls {
     position: absolute;
     top: 40px;
-    right: 110px;
+    right: 114px;
     &--volume {
       width: 20px;
       height: 20px;
@@ -125,11 +125,6 @@
       border-radius: 2px;
     }
   }
-}
-
-@include keyframes (hide-show) {
-  0%, 80% { opacity: 0; }
-  100% { opacity: 1; }
 }
 
 @media (min-aspect-ratio: 16/9) {

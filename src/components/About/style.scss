@@ -1,0 +1,55 @@
+@import "src/styles/mixins.scss";
+@import "src/styles/svg.scss";
+
+.about {
+  @include animation('about-enter .5s ease both');
+  background-color: #e8e8e8;
+  top: 0;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  left: 0;
+  color: black;
+  line-height: 25px;
+  overflow: hidden;
+  z-index: 1;
+
+  a {
+    color: #484848;
+    font-size: inherit;
+  }
+
+  &--wrapper {
+    padding: 150px;
+    @include animation('delayed-fade-in 1s');
+    &--title{
+      font-weight: 600;
+    }
+    &--text {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    &--credits {
+      @include center(horizontal);
+      @include animation('delayed-fade-in 1.5s');
+      position: absolute;
+      bottom: 50px;
+      font-size: 11px;
+      a {
+        font-size: inherit;
+        margin-left: 4px;
+      }
+      span {
+        @include svg-heart(#f31746);
+        width: 11px;
+        height: 11px;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@include keyframes(about-enter) {
+  from {height: 0px; top:100%}
+  to {height: 100%; top:0}
+};

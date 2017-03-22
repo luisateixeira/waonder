@@ -60,7 +60,7 @@ class Home extends React.Component {
         </div>
 
         <div className="home--presentation-container">
-          <div className="home--presentation-container--title">wa<span>o</span>nder</div>
+          <div className="home--presentation-container--title">wa<del>o</del>nder</div>
           <div className="home--presentation-container--subtitle">{config.description}</div>
 
           <div className="home--presentation-container--start">

@@ -4,7 +4,6 @@
 
 .destination {
 
-  &--logo,
   &--country,
   &--intro,
   &--scroll-controls,
@@ -52,20 +51,10 @@
     @include center(horizontal);
   }
 
-  &--logo {
-    @include logo(20px);
-    left: 40px;
-    top: 40px;
-    background: black;
-    padding: 0px 5px;
-    @include animation('fade-in .5s');
-    cursor: pointer;
-  }
-
   &--next-button {
     @include center(vertical);
     @include svg-circle(#fff, 'none');
-    right: 10px;
+    right: 40px;
     width: 50px;
     height: 50px;
     background-color: transparent;

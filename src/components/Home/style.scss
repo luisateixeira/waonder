@@ -74,6 +74,7 @@
         background-color: transparent;
         cursor: pointer;
         position: relative;
+        color: white;
 
         &::before {
           @include svg-globe;

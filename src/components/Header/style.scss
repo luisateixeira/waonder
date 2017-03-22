@@ -1,0 +1,117 @@
+@import "src/styles/svg.scss";
+@import "src/styles/mixins.scss";
+
+.header {
+  color: #c1c1c1;
+  font-size: 10px;
+  z-index: 999;
+  position: relative;
+  
+  &--left {
+    top: 40px;
+    left: 40px;
+    position: absolute;
+  }
+
+  &--right {
+    top: 40px;
+    right: 40px;
+    position: absolute;
+  }
+
+  &--about-button {
+    @include svg-menu;
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    position: relative;
+    &::after {
+      content: '';
+      @include svg-close(black);
+      @include transition(none);
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      display: block;
+      opacity: 0;
+    }
+  }
+
+  &--share {
+    &--twitter,
+    &--facebook {
+      margin: 4px 10px 0 0;
+      display: block;
+      float: left;
+      width: 12px;
+      height: 12px;
+      opacity: 1;
+      cursor: pointer;
+      @include transition(opacity .5);
+      position: relative;
+      &:hover {
+        opacity: .6;
+      }
+      &::after {
+        content: '';
+        @include transition(none);
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        display: block;
+        opacity: 0;
+      }
+    }
+
+    &--twitter {
+      @include svg-twitter;
+      width: 14px;
+      &::after {
+        @include svg-twitter(black);
+        width: 14px;
+      }
+    }
+    &--facebook {
+      @include svg-facebook;
+      &::after {
+        @include svg-facebook(black);
+      }
+    }
+  }
+
+  &--logo {
+    @include logo(20px);
+    left: 40px;
+    top: 40px;
+    background-color: black;
+    padding: 0px 5px;
+    @include animation('delayed-fade-in 1s');
+    @include transition(none);
+    cursor: pointer;
+  }
+
+  &.inverted {
+    .header--about-button {
+      height: 0;
+    }
+    .header--about-button::after,
+    .header--share--twitter::after,
+    .header--share--facebook::after {
+      @include transition(opacity .5s);
+      opacity: 1;
+    }
+    .header--logo {
+      @include transition(background-color .5s);
+      background-color: transparent;
+      cursor: default;
+    }
+  }
+}

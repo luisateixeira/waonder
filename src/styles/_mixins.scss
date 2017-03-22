@@ -2,9 +2,6 @@
   font-size: $font-size;
   font-family: 'Monoton', sans-serif;
   opacity: .9;
-  span {
-    text-decoration: line-through;
-  }
 }
 
 @mixin transition($transition...) {

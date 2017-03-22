@@ -25,6 +25,11 @@ body {
   text-align: center;
 
   .container {
+    min-width: 700px;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+
     &--destination-button {
       border-radius: 50%;
       width: 40px;

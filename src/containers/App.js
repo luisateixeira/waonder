@@ -1,5 +1,6 @@
 import React from 'react';
-import Footer from '../components/Footer';
+import Header from '../components/Header';
+import Main from './Main';
 
 class App extends React.Component {
   componentDidMount() {
@@ -7,28 +8,41 @@ class App extends React.Component {
   }
 
   render() {
+    const {resetDestinaton, destination} = this.props;
     return (
       <div className="container">
+        <Main />
         {this.props.children}
-        <Footer />
+        <Header {...{resetDestinaton, destination}}/>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  children: React.PropTypes.element.isRequired,
-  fetchAllDestinations: React.PropTypes.func.isRequired
+  children: React.PropTypes.element,
+  fetchAllDestinations: React.PropTypes.func.isRequired,
+  resetDestinaton: React.PropTypes.func.isRequired,
+  destination: React.PropTypes.object,
 }
 
 import {connect} from 'react-redux';
-import {fetchAllDestinations} from '../actions/destination';
+import {fetchAllDestinations, resetDestinaton} from '../actions/destination';
+import {getDestination} from '../reducers';
+
+const mapStateToProps = (state) => {
+  const destination = getDestination(state);
+  return {
+    destination
+  }
+}
 
 const mapDispatchToProps = {
-  fetchAllDestinations: fetchAllDestinations
+  fetchAllDestinations: fetchAllDestinations,
+  resetDestinaton: resetDestinaton
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
