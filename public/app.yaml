@@ -5,10 +5,10 @@ threadsafe: yes
 
 handlers:
 
-- url: /(.+)
+- url: /(.*\.(gif|GIF|png|PNG|jpg|JPG|ico|ICO|js|JS|css|CSS))$
   static_files: dist/\1
   upload: dist/(.*)
 
-- url: /
+- url: /(.*)$
   static_files: dist/index.html
   upload: dist/index.html
