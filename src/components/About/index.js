@@ -15,8 +15,12 @@ const About = () => {
           <br></br>
           All the videos are powered by <a href="https://vimeo.com/" target="_black">vimeo</a> and the photos by <a href="https://www.flickr.com/" target="_black">flirck</a>.
         </div>
-        <div className="about--wrapper--credits">made with <span></span> by
-          <a href="http://www.luisateixeira.com" target="_blank">Luisa Teixeira</a>
+        <div className="about--wrapper--credits">
+          <div>
+            made with <span></span> by
+            <a href="http://www.luisateixeira.com" target="_blank">Luisa Teixeira</a>
+          </div>
+          <div>no javascript was harmed in the making of this app</div>
         </div>
       </div>
     </div>
