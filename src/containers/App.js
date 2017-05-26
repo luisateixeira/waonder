@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import Main from './Main';
+import {toJS} from './toJS';
 
 class App extends React.Component {
   componentDidMount() {
@@ -53,4 +54,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(toJS(App));

@@ -57,9 +57,9 @@ export const fetchDestination = () => (dispatch, getState) => {
   });
 
   const destination = generateDestination({
-    countries: fromReducers.getCountries(getState()),
-    videos: fromReducers.getVideos(getState()),
-    videosByCountry: fromReducers.getVideosByCountry(getState())
+    countries: fromReducers.getCountries(getState()).toJS(),
+    videos: fromReducers.getVideos(getState()).toJS(),
+    videosByCountry: fromReducers.getVideosByCountry(getState()).toJS()
   });
 
   if (destination) {
@@ -80,8 +80,8 @@ export const FETCH_ALL_DESTINATIONS_SUCCESS = 'FETCH_ALL_DESTINATIONS_SUCCESS';
 export const FETCH_ALL_DESTINATIONS_FAILURE = 'FETCH_ALL_DESTINATIONS_FAILURE';
 
 export const fetchAllDestinations = () => (dispatch, getState) => {
-  const countries = fromReducers.getCountries(getState());
-  const videos = fromReducers.getVideos(getState());
+  const countries = fromReducers.getCountries(getState()).toJS();
+  const videos = fromReducers.getVideos(getState()).toJS();
   const fetchCountries = () => Object.keys(countries).length ? Promise.resolve() : dispatch(entitiesActionCreators.fetchCountries());
   const fecthVideos = () => Object.keys(videos).length ? Promise.resolve() : dispatch(entitiesActionCreators.fecthVideos());
 

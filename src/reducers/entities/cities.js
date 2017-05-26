@@ -1,10 +1,11 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-immutable';
 import * as ActionTypes from '../../actions/entities';
+import {Map} from 'immutable';
 
-const byId = (state = {}, action) => {
+const byId = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.FETCH_COUNTRIES_SUCCESS:
-      return {...action.response.entities.cities};
+      return Map(action.response.entities.cities);
     default:
       return state;
   }
@@ -27,5 +28,5 @@ export default combineReducers({
   isFetching
 });
 
-export const getEntities = (state) => state.byId;
-export const getIsFetching = (state) => state.isFetching;
+export const getEntities = (state) => state.get('byId');
+export const getIsFetching = (state) => state.get('isFetching');

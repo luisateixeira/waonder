@@ -1,17 +1,16 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-immutable';
 import * as ActionTypes from '../../actions/entities';
+import {Map, List} from 'immutable';
 
-const byId = (state = {}, action) => {
+const byId = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.FETCH_VIDEOS_SUCCESS: {
       const newState = action.response.result
         .filter(id => action.response.entities.videos[id].countries.length > 0)
-        .reduce((accum, id) => {
-          accum[id] = action.response.entities.videos[id];
-          return accum;
-        }, {});
+        .reduce((accum, id) => accum.set(id, action.response.entities.videos[id]),
+            Map().asMutable()).asImmutable();
 
-      return {...state, ...newState};
+      return state.merge(newState);
     }
     default:
       return state;
@@ -19,26 +18,23 @@ const byId = (state = {}, action) => {
 }
 
 
-const byCountry = (state = {}, action) => {
-
+const byCountry = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.FETCH_VIDEOS_SUCCESS: {
       const newState = action.response.result
         .reduce((accum, id) => {
+         
           const countries = action.response.entities.videos[id].countries;
           if (countries.length) {
             for (let country of countries) {
-              accum[country] = accum[country] || [];
-              accum[country].push(id);
+              const list = accum.get(country, List()).asMutable();
+              accum.set(country, list.push(id).asImmutable());
             }
           }
           return accum;
-        }, {});
-
-      return Object.keys(state).reduce((accum, country) => {
-        accum[country] = [...(state[country] || []), ...(accum[country] || [])];
-        return accum;
-      }, newState);
+        }, Map().asMutable()).asImmutable();
+      
+      return state.mergeDeep(newState);
     }
 
     default:
@@ -74,7 +70,7 @@ export default combineReducers({
   isFetching
 });
 
-export const getEntities = (state) => state.byId;
-export const getTotal = (state) => state.total;
-export const getVideosByCountry = (state) => state.byCountry;
-export const getIsFetching = (state) => state.isFetching;
+export const getEntities = (state) => state.get('byId');
+export const getTotal = (state) => state.get('total');
+export const getVideosByCountry = (state) => state.get('byCountry');
+export const getIsFetching = (state) => state.get('isFetching');

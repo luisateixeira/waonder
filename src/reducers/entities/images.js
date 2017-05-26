@@ -1,22 +1,23 @@
 import * as ActionTypes from '../../actions/entities';
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-immutable';
+import {Map} from 'immutable';
 
-const byDestinationId = (state = {}, action) => {
+const byDestinationId = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.FETCH_IMAGES_SUCCESS:
-      return {...state, [action.actionID]: action.response};
+      return state.set(action.actionID, action.response);
     default:
       return state;
   }
 }
 
-const isFetching = (state = {}, action) => {
+const isFetching = (state = Map(), action) => {
   switch (action.type) {
     case ActionTypes.FETCH_IMAGES_START:
-      return {...state, [action.actionID]: true};
+      return state.set(action.actionID, true);
     case ActionTypes.FETCH_IMAGES_FAILURE:
     case ActionTypes.FETCH_IMAGES_SUCCESS:
-      return {...state, [action.actionID]: false};
+      return state.set(action.actionID, false);
     default:
       return state;
   }
@@ -28,7 +29,7 @@ export default combineReducers({
 });
 
 export const getEntities = (state, destinationId) =>
-  state.byDestinationId[destinationId];
+  state.getIn(['byDestinationId', destinationId]);
 
 export const getIsFetching = (state, destinationId) =>
-  state.isFetching[destinationId];
+  state.getIn(['isFetching', destinationId]);

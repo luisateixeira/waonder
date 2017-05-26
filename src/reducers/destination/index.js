@@ -1,46 +1,28 @@
 import * as ActionTypes from '../../actions/destination';
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-immutable';
+import {Map} from 'immutable';
 
+const id = (action) => action.response.id;
+const country = (action) => Map(action.response.country);
+const video = (action) => Map(action.response.video);
 
-const id = (state = null, action) => {
+const destination = (state = null, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_DESTINATION_START:
     case ActionTypes.FETCH_DESTINATION_FAILURE:
     case ActionTypes.RESET_DESTINATION:
       return null;
     case ActionTypes.FETCH_DESTINATION_SUCCESS:
-      return action.response.id;
+      return Map({
+          id: id(action),
+          video: video(action),
+          country: country(action)
+        }
+      );
     default:
       return state;
   }
-};
-
-const country = (state = null, action) => {
-  switch (action.type) {
-    case ActionTypes.FETCH_DESTINATION_START:
-    case ActionTypes.FETCH_DESTINATION_FAILURE:
-    case ActionTypes.RESET_DESTINATION:
-      return null;
-    case ActionTypes.FETCH_DESTINATION_SUCCESS:
-      return {...action.response.country};
-    default:
-      return state;
-  }
-};
-
-const video = (state = null, action) => {
-  switch (action.type) {
-    case ActionTypes.FETCH_DESTINATION_START:
-    case ActionTypes.FETCH_DESTINATION_FAILURE:
-    case ActionTypes.RESET_DESTINATION:
-      return null;
-    case ActionTypes.FETCH_DESTINATION_SUCCESS:
-      return {...action.response.video};
-    default:
-      return state;
-  }
-};
-
+}
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
@@ -56,18 +38,9 @@ const isFetching = (state = false, action) => {
 }
 
 export default combineReducers({
-  id,
-  country,
-  video,
+  destination,
   isFetching
 });
 
-
-export const getDestination = (state) => {
-  if (state.country) {
-    return {id: state.id, video: state.video, country: state.country};
-  }
-  return null;
-}
-
-export const getIsFetching = (state) => state.isFetching;
+export const getDestination = (state) => state.get('destination');
+export const getIsFetching = (state) => state.get('isFetching');
