@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import Main from './Main';
-import {toJS} from './toJS';
+import {toJS} from '../utils/toJS';
 
 class App extends React.Component {
   componentDidMount() {

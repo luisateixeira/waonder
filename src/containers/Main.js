@@ -2,7 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Destination from '../components/Destination';
 import Home from '../components/Home';
-import {toJS} from './toJS';
+import {toJS} from '../utils/toJS';
 
 class Main extends React.Component {
 
