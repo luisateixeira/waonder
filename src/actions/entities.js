@@ -8,8 +8,8 @@ export const FETCH_VIDEOS_SUCCESS = 'FETCH_VIDEOS_SUCCESS';
 export const FETCH_VIDEOS_FAILURE = 'FETCH_VIDEOS_FAILURE';
 
 const processVideos = (response, getState) => {
-  const countriesEntities = getCountries(getState());
-  const citiesEntities = getCities(getState());
+  const countriesEntities = getCountries(getState()).toJS();
+  const citiesEntities = getCities(getState()).toJS();
 
   // assign countries for each video
   // filter out videos that have more then one country

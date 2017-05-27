@@ -2,6 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Destination from '../components/Destination';
 import Home from '../components/Home';
+import {toJS} from '../utils/toJS';
 
 class Main extends React.Component {
 
@@ -67,7 +68,7 @@ const mapStateToProps = (state) => {
   const destination = getDestination(state);
   return {
     destination,
-    images: destination ? getImages(state, destination.id) : null,
+    images: destination ? getImages(state, destination.get('id')) : null,
     allDestinationsIsFetching: getAllDestinationsIsFetching(state)
   }
 }
@@ -80,4 +81,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main);
+)(toJS(Main));
