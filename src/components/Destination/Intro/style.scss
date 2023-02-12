@@ -19,8 +19,7 @@ $blink-delay: .75;
     white-space: nowrap;
     margin: 0 auto;
     letter-spacing: .1em;
-    @include animation(#{'typing ' + $typing-delay + 's steps(10, end),
-                          blink-caret ' + $blink-delay + 's step-end infinite'});
+    @include animation(#{'typing ' + $typing-delay + 's steps(10, end), blink-caret ' + $blink-delay + 's step-end infinite'});
   }
 
   &--preloader {

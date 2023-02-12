@@ -17,7 +17,7 @@ export default {
   },
   api: {
     countries: {
-      uri: 'https://restcountries.eu/rest/v1/all',
+      uri: 'https://restcountries.com/v2/all',
       storage: true,
     },
     facebook: {
